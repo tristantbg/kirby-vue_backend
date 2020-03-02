@@ -1,0 +1,55 @@
+title: Project
+tabs:
+  infos:
+    label: Infos
+    icon: text
+    columns:
+      - width: 3/4
+        sections:
+          infos:
+            type: fields
+            fields:
+              subtitle:
+                label: Subtitle
+                type: text
+                width: 3/4
+              date:
+                label: Year
+                type: date
+                min: '1990-01-01'
+                width: 1/4
+              text:
+                label: Description
+                type: markdown
+                size: medium
+                buttons:
+                  - link
+                  - email
+      - width: 1/4
+        sections:
+          thumbnail:
+            type: fields
+            fields:
+              autoid:
+                type: hidden
+                translate: false
+              featured:
+                label: Featured image
+                type: files
+                multiple: false
+                query: page.files.template('image')
+                uploads: image
+  content:
+    extends: sections/blocks
+  files:
+    icon: file
+    sections:
+      files:
+        type: files
+        layout: list
+        template: file
+      images:
+        type: files
+        layout: cards
+        template: image
+        size: tiny

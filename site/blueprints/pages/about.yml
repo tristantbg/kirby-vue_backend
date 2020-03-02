@@ -1,0 +1,15 @@
+title: About
+preset: page
+pages: false
+files:
+  template: file
+fields:
+  text:
+    label: Description
+    type: markdown
+    size: large
+    buttons:
+      - link
+      - email
+      - bold
+      - italic
