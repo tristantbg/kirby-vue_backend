@@ -1,0 +1,75 @@
+{
+  "name": "bnomei/kirby3-autoid",
+  "type": "kirby-plugin",
+  "version": "2.2.1",
+  "description": "Automatic unique ID for Pages, Files and nested Structures including performant helpers to retrieve them. Bonus: Tiny-URL.",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Bruno Meilick",
+      "email": "b@bnomei.com"
+    }
+  ],
+  "keywords": [
+    "kirby3",
+    "kirby3-cms",
+    "kirby3-plugin",
+    "autoid",
+    "pages",
+    "files",
+    "incremental",
+    "random",
+    "uuid",
+    "token",
+    "lookup",
+    "cache",
+    "performance",
+    "tiny-url",
+    "structures",
+    "nested"
+  ],
+  "autoload": {
+    "psr-4": {
+      "Bnomei\\": "classes/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "require": {
+    "php": ">=7.2.0",
+    "getkirby/composer-installer": "^1.1",
+    "hidehalo/nanoid-php": "^1.1",
+    "ramsey/uuid": "^3.8"
+  },
+  "require-dev": {
+    "getkirby/cms": "^3.2",
+    "nunomaduro/phpinsights": "^1.8",
+    "php-coveralls/php-coveralls": "^2.1",
+    "phpstan/phpstan": "^0.12.8",
+    "phpunit/phpunit": "^8.3"
+  },
+  "scripts": {
+    "analyze": "phpstan analyse",
+    "insights": "./vendor/bin/phpinsights -v",
+    "fix": "php-cs-fixer fix",
+    "test": [
+      "mkdir -p tests/logs",
+      "phpunit --configuration ./phpunit.xml"
+    ],
+    "dist": [
+      "composer install --no-dev --optimize-autoloader",
+      "git rm -rf --cached .; git add .;"
+    ],
+    "kirby": [
+      "composer install",
+      "composer update",
+      "composer install --working-dir=tests/kirby --no-dev --optimize-autoloader",
+      "composer update --working-dir=tests/kirby"
+    ]
+  },
+  "extra": {
+    "kirby-cms-path": "tests/kirby"
+  }
+}

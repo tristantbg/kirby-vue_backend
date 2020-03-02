@@ -1,0 +1,7 @@
+title: Home
+preset: page
+pages: false
+files: false
+fields:
+  hidden:
+    type: hidden

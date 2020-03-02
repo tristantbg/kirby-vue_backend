@@ -1,0 +1,18 @@
+.DS_Store
+Thumbs.db
+/yarn.lock
+/yarn-error.log
+/composer.lock
+/package-json.lock
+/npm-debug.log
+
+/lib
+/node_modules
+
+/storage/cache
+/vendor
+
+# Ignored in folder
+# /public/media/*
+# /storage/accounts/*
+# /storage/sessions/*

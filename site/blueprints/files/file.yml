@@ -1,0 +1,39 @@
+title: File
+
+options:
+  changeName: false
+
+accept:
+  mime: application/rtf, application/msword, application/vnd.openxmlformats-officedocument.wordprocessingml.document, application/vnd.ms-excel, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/x-rar-compressed, application/pdf, application/zip
+  maxwidth: 9000
+  maxheight: 9000
+
+fields:
+  fileTitle:
+    label: Title
+    type: text
+  color:
+    label: Color
+    type: color
+    width: 1/2
+  focus:
+    label: Focus crop
+    type: focus
+    width: 1/2
+  alt:
+    label: Alt Text
+    type: text
+    width: 1/2
+  caption:
+    label: Caption
+    type: textarea
+    buttons:
+      - link
+      - email
+      - bold
+      - italic
+    width: 1/2
+  credits:
+    label: Credits
+    type: text
+    width: 1/2

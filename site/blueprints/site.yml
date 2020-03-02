@@ -1,0 +1,53 @@
+title: Site
+tabs:
+  pages:
+    sections:
+      pages:
+        headline: Pages
+        type: pages
+        create:
+          - default
+  settings:
+    label: Settings
+    icon: cog
+    sections:
+      infos:
+        type: fields
+        fields:
+          description:
+            label: Description
+            type:  textarea
+            buttons: false
+            maxlength: 158
+            width: 1/2
+          keywords:
+            label: Keywords
+            type:  tags
+            width: 1/2
+          customcss:
+            label: Custom CSS
+            type: textarea
+            buttons: false
+          googleAnalytics:
+            label: Google Analytics ID
+            type: text
+            icon: code
+            help: Tracking ID in the form UA-XXXXXXXX-X. Keep this field empty if you are not using it.
+            width: 1/2
+          ogimage:
+            label: Facebook OpenGraph image
+            type: files
+            query: site.files.template('image')
+            uploads: image
+            multiple: false
+            layout: cards
+            size: tiny
+            help: 1200x630px minimum
+            width: 1/2
+  files:
+    icon: file
+    sections:
+      images:
+        type: files
+        layout: cards
+        template: image

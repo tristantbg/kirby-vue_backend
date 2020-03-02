@@ -1,0 +1,10 @@
+{
+  "name": "kirby-vue_backend",
+  "version": "1.0.0",
+  "description": "Kirby Vue Backend",
+  "author": "Tristan Bagot <„hello@tristanbagot.com“>",
+  "private": true,
+  "scripts": {
+    "dev": "cd public && php -S 127.0.0.1:8888 router.php"
+  }
+}

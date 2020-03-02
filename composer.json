@@ -1,0 +1,22 @@
+{
+  "name": "tristantbg/kirby-vue_backend",
+  "description": "Kirby Vue Backend",
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/getkirby/kirby"
+    }
+  ],
+  "require": {
+    "getkirby/cms": "dev-master as 3.3.4",
+    "bnomei/kirby3-autoid": "^2.2",
+    "timoetting/kirby-builder": "^2.0",
+    "sylvainjule/embed": "^1.0",
+    "oblik/kirby-link-field": "^3.0",
+    "omz13/kirby3-xmlsitemap": "^1.2"
+  },
+  "scripts": {
+    "build": "composer update; composer dumpautoload -o;"
+  },
+  "minimum-stability": "beta"
+}

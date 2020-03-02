@@ -1,0 +1,16 @@
+title: Projects
+options:
+  delete: false
+  changeTemplate: false
+  changeStatus: false
+sections:
+  projects:
+    headline: Projects
+    type: pages
+    templates: project
+    layout: cards
+    image:
+      cover: false
+      ratio: 3/2
+      back: black
+      query: page.featured.toFile
