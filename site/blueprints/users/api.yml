@@ -1,7 +1,9 @@
-title: Client
+title: API access
+extends: users/default
+
 permissions:
   access:
-    panel: false
+    panel: true
     users: false
     site: false
   site:
