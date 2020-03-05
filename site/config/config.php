@@ -61,6 +61,9 @@ return [
                 if ($decoded['type'] == 'collection') {
                   $p = 0;
                   foreach ($decoded['data'] as $project) {
+                      $kirbyPage = page($project['id']);
+                      $project['template'] = $kirbyPage->intendedtemplate();
+
                       if (isset($project['content']['cover'])) {
                           $i = 0;
 
