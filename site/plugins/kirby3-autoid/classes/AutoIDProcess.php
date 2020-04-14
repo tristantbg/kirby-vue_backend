@@ -77,25 +77,28 @@ final class AutoIDProcess
     private function indexStructures(): void
     {
         $data = [];
+
         foreach ($this->object->blueprint()->fields() as $field) {
-            if (A::get($field, 'type') !== 'structure') {
-                continue;
-            }
-            $fieldname = A::get($field, 'name');
-            if (! $fieldname) {
-                continue;
-            }
-            $field = $this->object->{$fieldname}();
-            if ($field->isEmpty()) {
-                continue;
-            }
             try {
+                if (A::get($field, 'type') !== 'structure') {
+                    continue;
+                }
+                $fieldname = A::get($field, 'name');
+                if (! $fieldname) {
+                    continue;
+                }
+                $field = $this->object->{$fieldname}();
+                if ($field->isEmpty()) {
+                    continue;
+                }
+
                 $yaml = Yaml::decode($field->value());
                 $yaml = $this->indexArray($yaml, [$fieldname]);
                 $data[$fieldname] = Yaml::encode($yaml);
             } catch (Exception $exception) {
             }
         }
+
         $this->update = array_merge($this->update, $data);
     }
 
@@ -135,7 +138,8 @@ final class AutoIDProcess
 
         try {
             kirby()->impersonate('kirby');
-            $this->object->update($this->update);
+            // use save() not update() to avoid hooks
+            $this->object->save($this->update);
         } catch (Exception $exception) {
             $this->revert();
         } finally {
@@ -162,6 +166,8 @@ final class AutoIDProcess
             $data = $this->itemFromStructureObject($this->object, $tree);
         } elseif (is_a($this->object, Page::class)) {
             $data = $this->itemFromPage($this->object);
+        } elseif (is_a($this->object, Site::class)) {
+            $data = $this->itemFromSite($this->object);
         } elseif (is_a($this->object, File::class)) {
             $data = $this->itemFromFile($this->object);
         }
@@ -177,6 +183,17 @@ final class AutoIDProcess
             'page' => $object->id(),
             'modified' => $object->modified(),
             'kind' => AutoIDItem::KIND_PAGE,
+            'template' => (string) $object->intendedTemplate(),
+        ];
+    }
+
+    private function itemFromSite($object): array
+    {
+        return [
+            'page' => '$',
+            'modified' => $object->modified(),
+            'kind' => AutoIDItem::KIND_PAGE,
+            'template' => 'site',
         ];
     }
 
@@ -187,6 +204,7 @@ final class AutoIDProcess
             'filename' => $object->filename(),
             'modified' => $object->modified(),
             'kind' => AutoIDItem::KIND_FILE,
+            'template' => (string) $object->template(),
         ];
     }
 
@@ -197,6 +215,7 @@ final class AutoIDProcess
             'modified' => $object->modified(),
             'structure' => implode(',', $tree),
             'kind' => AutoIDItem::KIND_STRUCTUREOBJECT,
+            'template' => 'structureobject',
         ];
     }
 }

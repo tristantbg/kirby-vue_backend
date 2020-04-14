@@ -6,6 +6,8 @@ use Bnomei\AutoID;
 use Bnomei\AutoIDDatabase;
 use Kirby\Cms\File;
 use Kirby\Cms\Page;
+use Kirby\Cms\StructureObject;
+use Kirby\Toolkit\F;
 use Kirby\Toolkit\Str;
 use PHPUnit\Framework\TestCase;
 
@@ -16,6 +18,8 @@ final class AutoidTest extends TestCase
 
     public function setUp(): void
     {
+        $this->filepath = __DIR__ . '/flowers.jpg';
+
         // AutoID::index(true);
     }
 
@@ -24,9 +28,8 @@ final class AutoidTest extends TestCase
         AutoID::flush();
 
         $this->depth = 3;
-        $this->filepath = __DIR__ . '/flowers.jpg';
 
-        if (site()->pages()->index()->notTemplate('home')->count() === 0) {
+        if (site()->pages()->children()->notTemplate('home')->count() === 0) {
             for ($i = 0; $i < $this->depth; $i++) {
                 $this->createPage(site(), $i, $this->depth);
             }
@@ -34,7 +37,7 @@ final class AutoidTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function createPage($parent, int $idx, int $depth = 3)
+    public function createPage($parent, int $idx, int $depth = 3): Page
     {
         $id = 'Test ' . abs(crc32(microtime() . $idx . $depth));
         /* @var $page Page */
@@ -74,6 +77,8 @@ final class AutoidTest extends TestCase
                 $this->createPage($page, $i, $depth);
             }
         }
+
+        return $page;
     }
 
     public function randomPage(): ?Page
@@ -159,9 +164,13 @@ final class AutoidTest extends TestCase
 
         /* @var $page Page */
         $page = $this->randomPage();
+        var_dump($page->id());
+        var_dump(AutoID::findByID($page->id()));
+
         $this->assertTrue(
             AutoID::findByID($page->id()) === $page
         );
+
         $this->assertTrue(
             \autoid($page->id()) === $page
         );
@@ -269,9 +278,87 @@ final class AutoidTest extends TestCase
         $randID = $randomTax['autoid'];
         $find = \autoid($randID);
 
-        $this->assertInstanceOf(\Kirby\Cms\StructureObject::class, $find);
+        $this->assertInstanceOf(StructureObject::class, $find);
         $this->assertEquals($randID, $find->id());
         $this->assertEquals(site(), $find->parent());
         $this->assertEquals($randomTax['title'], $find->title());
+    }
+
+    public function testChangeSlugOfPage()
+    {
+        $randomPage = $this->randomPage();
+        $autoid = $randomPage->autoid()->value();
+        $oldSlug = $randomPage->slug();
+        $newSlug = md5($oldSlug . time());
+
+        kirby()->impersonate('kirby');
+        $updatedPage = $randomPage->changeSlug($newSlug);
+        $this->assertEquals($newSlug, $updatedPage->slug());
+        $this->assertEquals($autoid, $updatedPage->autoid()->value());
+        $this->assertEquals($updatedPage, autoid($autoid));
+
+        // revert
+        $updatedPage->changeSlug($oldSlug);
+    }
+
+    public function testFindByTemplate()
+    {
+        // AutoID::flush();
+        AutoID::index(true);
+
+        $randomPage = $this->randomPage();
+        $collection = AutoIDDatabase::singleton()->findByTemplate(
+            'autoidtest',
+            $randomPage->id()
+        );
+        $this->assertEquals($randomPage->index()->not($randomPage)->count(), $collection->count());
+
+        $randomPage = $this->randomPage();
+        $collection = $randomPage->searchForTemplate('autoidtest');
+        $this->assertEquals($randomPage->index()->not($randomPage)->count(), $collection->count());
+
+        $collection = site()->searchForTemplate('autoidtest');
+        $this->assertEquals(site()->index()->notTemplate('home')->count(), $collection->count());
+    }
+
+    public function testCreateAndRetrieveAutoID()
+    {
+        $newPage = $this->createPage(page('home'),0 ,0);
+
+        // autoid is null since object is not the one past the update hook
+        $this->assertTrue($newPage->autoid()->isEmpty());
+
+        // value autoid in NEW pageobject is still null
+        $this->assertNull(\autoid($newPage)->autoid()->value());
+
+        // but AUTOID pagemethod should register and retrieve non the less
+        $autoid = $newPage->AUTOID();
+        $this->assertRegExp('/^.{8}$/', $autoid);
+        $this->assertTrue(AutoIDDatabase::singleton()->exists($autoid));
+        $this->assertEquals($newPage, AutoID::findByID($newPage->id()));
+        $this->assertEquals($newPage, \autoid($newPage->id()));
+        $this->assertEquals($newPage, \autoid($newPage));
+
+        $newPageID = $newPage->id();
+        $this->assertTrue($newPage->delete(true));
+        $this->assertNull(\autoid($autoid));
+
+        $this->assertNull(AutoID::findByID($newPageID));
+    }
+
+    public function testEdgeCases()
+    {
+        $this->assertNull(AutoIDDatabase::singleton()->modified(['not', 'existing', 'ids']));
+
+        $randomPage = $this->randomPage();
+        $this->assertNotNull(AutoIDDatabase::singleton()->findByID(
+            new \Kirby\Cms\Field($randomPage, 'ref', $randomPage->id()) // a field with id ref
+        ));
+
+        $dbfilePath = AutoIDDatabase::singleton()->databaseFile();
+        F::remove($dbfilePath);
+        $this->assertFileNotExists($dbfilePath);
+        new AutoIDDatabase(); // create db
+        $this->assertFileExists($dbfilePath);
     }
 }

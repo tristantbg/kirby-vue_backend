@@ -1,8 +1,0 @@
-title: Editor
-extends: users/default
-
-permissions:
-  pages:
-    delete: true
-  users:
-    update: false

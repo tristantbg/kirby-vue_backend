@@ -9,18 +9,17 @@ tabs:
           infos:
             type: fields
             fields:
+              credit:
+                label: Credit
+                type: text
+                width: 1/2
               subtitle:
                 label: Subtitle
                 type: text
-                width: 3/4
-              date:
-                label: Year
-                type: date
-                min: '1990-01-01'
-                width: 1/4
+                width: 1/2
               text:
                 label: Description
-                type: markdown
+                type: textarea
                 size: medium
                 buttons:
                   - link
@@ -39,6 +38,17 @@ tabs:
                 multiple: false
                 query: page.files.template('image')
                 uploads: image
+              featuredVideo:
+                label: Featured video
+                type: pages
+                multiple: false
+                layout: list
+                query: site.find('vimeo').children
+                image:
+                  cover: false
+                  ratio: 3/2
+                  back: black
+                  query: page.cover.toFile
   content:
     extends: sections/blocks
   files:

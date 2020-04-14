@@ -1,0 +1,17 @@
+title: Artists
+options:
+  delete: false
+  changeTemplate: false
+  changeStatus: false
+sections:
+  artists:
+    headline: Artists
+    type: pages
+    templates: artist
+    layout: list
+    info: '{{ page.job }}'
+    image:
+      cover: false
+      ratio: 3/2
+      back: black
+      query: page.featured.toFile

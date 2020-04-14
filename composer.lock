@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "26dc35d9c20d917634dea6418dc6eb71",
+    "content-hash": "31418a6d1547810f96e29752e0047f7c",
     "packages": [
         {
             "name": "bnomei/kirby3-autoid",
-            "version": "2.2.1",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bnomei/kirby3-autoid.git",
-                "reference": "9a9dd3abfe9621a3a269165e592e5fd0fd321cb1"
+                "reference": "4dd74d79d1c3bce482bbbfbda66de1324befd484"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bnomei/kirby3-autoid/zipball/9a9dd3abfe9621a3a269165e592e5fd0fd321cb1",
-                "reference": "9a9dd3abfe9621a3a269165e592e5fd0fd321cb1",
+                "url": "https://api.github.com/repos/bnomei/kirby3-autoid/zipball/4dd74d79d1c3bce482bbbfbda66de1324befd484",
+                "reference": "4dd74d79d1c3bce482bbbfbda66de1324befd484",
                 "shasum": ""
             },
             "require": {
@@ -32,6 +32,9 @@
                 "php-coveralls/php-coveralls": "^2.1",
                 "phpstan/phpstan": "^0.12.8",
                 "phpunit/phpunit": "^8.3"
+            },
+            "suggest": {
+                "bnomei/kirby3-bolt": "For a faster page lookup even with big content trees"
             },
             "type": "kirby-plugin",
             "extra": {
@@ -67,11 +70,13 @@
                 "pages",
                 "performance",
                 "random",
+                "sqlite",
+                "sqlite-database",
                 "tiny-url",
                 "token",
                 "uuid"
             ],
-            "time": "2020-02-03T18:32:18+00:00"
+            "time": "2020-03-30T11:45:49+00:00"
         },
         {
             "name": "claviska/simpleimage",
@@ -114,16 +119,16 @@
         },
         {
             "name": "composer/ca-bundle",
-            "version": "1.2.6",
+            "version": "1.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/ca-bundle.git",
-                "reference": "47fe531de31fca4a1b997f87308e7d7804348f7e"
+                "reference": "95c63ab2117a72f48f5a55da9740a3273d45b7fd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/47fe531de31fca4a1b997f87308e7d7804348f7e",
-                "reference": "47fe531de31fca4a1b997f87308e7d7804348f7e",
+                "url": "https://api.github.com/repos/composer/ca-bundle/zipball/95c63ab2117a72f48f5a55da9740a3273d45b7fd",
+                "reference": "95c63ab2117a72f48f5a55da9740a3273d45b7fd",
                 "shasum": ""
             },
             "require": {
@@ -166,7 +171,7 @@
                 "ssl",
                 "tls"
             ],
-            "time": "2020-01-13T10:02:55+00:00"
+            "time": "2020-04-08T08:27:21+00:00"
         },
         {
             "name": "embed/embed",
@@ -284,7 +289,7 @@
         },
         {
             "name": "getkirby/cms",
-            "version": "dev-master",
+            "version": "3.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getkirby/kirby.git",
@@ -505,16 +510,16 @@
         },
         {
             "name": "laminas/laminas-zendframework-bridge",
-            "version": "1.0.1",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-zendframework-bridge.git",
-                "reference": "0fb9675b84a1666ab45182b6c5b29956921e818d"
+                "reference": "bfbbdb6c998d50dbf69d2187cb78a5f1fa36e1e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/0fb9675b84a1666ab45182b6c5b29956921e818d",
-                "reference": "0fb9675b84a1666ab45182b6c5b29956921e818d",
+                "url": "https://api.github.com/repos/laminas/laminas-zendframework-bridge/zipball/bfbbdb6c998d50dbf69d2187cb78a5f1fa36e1e9",
+                "reference": "bfbbdb6c998d50dbf69d2187cb78a5f1fa36e1e9",
                 "shasum": ""
             },
             "require": {
@@ -553,7 +558,7 @@
                 "laminas",
                 "zf"
             ],
-            "time": "2020-01-07T22:58:31+00:00"
+            "time": "2020-04-03T16:01:00+00:00"
         },
         {
             "name": "league/color-extractor",
@@ -711,16 +716,16 @@
         },
         {
             "name": "oblik/kirby-link-field",
-            "version": "3.0.0",
+            "version": "3.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/OblikStudio/kirby-link-field.git",
-                "reference": "ce46a6cebb45f553de55dc0cd6fb8fa77e074622"
+                "reference": "e076d88206a9c39ca95b7b2ecef570ead7ceae62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/OblikStudio/kirby-link-field/zipball/ce46a6cebb45f553de55dc0cd6fb8fa77e074622",
-                "reference": "ce46a6cebb45f553de55dc0cd6fb8fa77e074622",
+                "url": "https://api.github.com/repos/OblikStudio/kirby-link-field/zipball/e076d88206a9c39ca95b7b2ecef570ead7ceae62",
+                "reference": "e076d88206a9c39ca95b7b2ecef570ead7ceae62",
                 "shasum": ""
             },
             "require": {
@@ -747,7 +752,7 @@
                 }
             ],
             "description": "Kirby 3 field for all types of links.",
-            "time": "2020-02-11T14:45:54+00:00"
+            "time": "2020-03-04T07:42:28+00:00"
         },
         {
             "name": "omz13/kirby3-xmlsitemap",
@@ -917,16 +922,16 @@
         },
         {
             "name": "psr/log",
-            "version": "1.1.2",
+            "version": "1.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/log.git",
-                "reference": "446d54b4cb6bf489fc9d75f55843658e6f25d801"
+                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/log/zipball/446d54b4cb6bf489fc9d75f55843658e6f25d801",
-                "reference": "446d54b4cb6bf489fc9d75f55843658e6f25d801",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/0f73288fd15629204f9d42b7055f72dacbe811fc",
+                "reference": "0f73288fd15629204f9d42b7055f72dacbe811fc",
                 "shasum": ""
             },
             "require": {
@@ -960,7 +965,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2019-11-01T11:05:21+00:00"
+            "time": "2020-03-23T09:12:05+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -1086,16 +1091,16 @@
         },
         {
             "name": "symfony/polyfill-ctype",
-            "version": "v1.14.0",
+            "version": "v1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-ctype.git",
-                "reference": "fbdeaec0df06cf3d51c93de80c7eb76e271f5a38"
+                "reference": "4719fa9c18b0464d399f1a63bf624b42b6fa8d14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/fbdeaec0df06cf3d51c93de80c7eb76e271f5a38",
-                "reference": "fbdeaec0df06cf3d51c93de80c7eb76e271f5a38",
+                "url": "https://api.github.com/repos/symfony/polyfill-ctype/zipball/4719fa9c18b0464d399f1a63bf624b42b6fa8d14",
+                "reference": "4719fa9c18b0464d399f1a63bf624b42b6fa8d14",
                 "shasum": ""
             },
             "require": {
@@ -1107,7 +1112,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.14-dev"
+                    "dev-master": "1.15-dev"
                 }
             },
             "autoload": {
@@ -1140,20 +1145,20 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2020-01-13T11:15:53+00:00"
+            "time": "2020-02-27T09:26:54+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
-            "version": "v1.14.0",
+            "version": "v1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-mbstring.git",
-                "reference": "34094cfa9abe1f0f14f48f490772db7a775559f2"
+                "reference": "81ffd3a9c6d707be22e3012b827de1c9775fc5ac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/34094cfa9abe1f0f14f48f490772db7a775559f2",
-                "reference": "34094cfa9abe1f0f14f48f490772db7a775559f2",
+                "url": "https://api.github.com/repos/symfony/polyfill-mbstring/zipball/81ffd3a9c6d707be22e3012b827de1c9775fc5ac",
+                "reference": "81ffd3a9c6d707be22e3012b827de1c9775fc5ac",
                 "shasum": ""
             },
             "require": {
@@ -1165,7 +1170,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.14-dev"
+                    "dev-master": "1.15-dev"
                 }
             },
             "autoload": {
@@ -1199,7 +1204,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2020-01-13T11:15:53+00:00"
+            "time": "2020-03-09T19:04:49+00:00"
         },
         {
             "name": "timoetting/kirby-builder",
@@ -1289,18 +1294,9 @@
         }
     ],
     "packages-dev": [],
-    "aliases": [
-        {
-            "alias": "3.3.4",
-            "alias_normalized": "3.3.4.0",
-            "version": "9999999-dev",
-            "package": "getkirby/cms"
-        }
-    ],
+    "aliases": [],
     "minimum-stability": "beta",
-    "stability-flags": {
-        "getkirby/cms": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

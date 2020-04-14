@@ -1,7 +1,7 @@
 {
   "name": "bnomei/kirby3-autoid",
   "type": "kirby-plugin",
-  "version": "2.2.1",
+  "version": "2.5.0",
   "description": "Automatic unique ID for Pages, Files and nested Structures including performant helpers to retrieve them. Bonus: Tiny-URL.",
   "license": "MIT",
   "authors": [
@@ -26,7 +26,9 @@
     "performance",
     "tiny-url",
     "structures",
-    "nested"
+    "nested",
+    "sqlite",
+    "sqlite-database"
   ],
   "autoload": {
     "psr-4": {
@@ -71,5 +73,8 @@
   },
   "extra": {
     "kirby-cms-path": "tests/kirby"
+  },
+  "suggest": {
+    "bnomei/kirby3-bolt": "For a faster page lookup even with big content trees"
   }
 }

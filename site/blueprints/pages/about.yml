@@ -6,7 +6,16 @@ files:
 fields:
   text:
     label: Description
-    type: markdown
+    type: textarea
+    size: large
+    buttons:
+      - link
+      - email
+      - bold
+      - italic
+  contact:
+    label: Contact
+    type: textarea
     size: large
     buttons:
       - link

@@ -6,7 +6,9 @@ namespace Bnomei;
 
 use Kirby\Cms\Field;
 use Kirby\Cms\File;
+use Kirby\Cms\FileVersion;
 use Kirby\Cms\Page;
+use Kirby\Cms\Site;
 use Kirby\Toolkit\Iterator;
 
 final class AutoID
@@ -22,7 +24,7 @@ final class AutoID
             while ($break > 0) {
                 $break--;
                 $newid = $generator();
-                if (AutoID::find($newid) === null) {
+                if (AutoIDDatabase::singleton()->exists($newid) === false) {
                     return $newid;
                 }
             }
@@ -34,7 +36,8 @@ final class AutoID
     {
         $indexed = 0;
         if (AutoIDDatabase::singleton()->count() === 0 || $force) {
-            set_time_limit(0);
+            $break = time() + 20;
+
             // site
             if (self::push(site())) {
                 $indexed++;
@@ -43,6 +46,9 @@ final class AutoID
             foreach (site()->pages()->index() as $page) {
                 if (self::push($page)) {
                     $indexed++;
+                }
+                if (!$force && time() >= $break) {
+                    break;
                 }
             }
         }
@@ -60,14 +66,15 @@ final class AutoID
 
     public static function remove($object): void
     {
-        $autoid = $object;
+        if (is_string($object)) {
+            AutoIDDatabase::singleton()->delete($object);
+        }
+
         if (is_a($object, Page::class) ||
             is_a($object, File::class)
         ) {
-            $autoid = $object->{self::FIELDNAME}();
+            AutoIDDatabase::singleton()->deleteByID($object->id());
         }
-
-        AutoIDDatabase::singleton()->delete($autoid);
     }
 
     public static function flush(): void
@@ -86,6 +93,16 @@ final class AutoID
         $find = AutoIDDatabase::singleton()->find($autoid);
         if (! $find) {
             $find = AutoIDDatabase::singleton()->findByID($autoid);
+        }
+        if(! $find) {
+            if($page = site()->index()->filterBy(self::FIELDNAME, $autoid)->first()) {
+                self::push($page);
+                return $page;
+            }
+            if($file = site()->index()->files()->filterBy(self::FIELDNAME, $autoid)->first()) {
+                self::push($file);
+                return $file;
+            }
         }
         return $find ? $find->toObject() : null;
     }
@@ -117,10 +134,31 @@ final class AutoID
             return AutoIDDatabase::singleton()->modifiedByArray($autoid);
         }
 
-        if (is_a($autoid, Page::class) || is_a($autoid, File::class)) {
-            if ($autoid->{AutoID::FIELDNAME}()->isNotEmpty()) {
-                return self::modified($autoid->{AutoID::FIELDNAME}());
+        if (is_a($autoid, Site::class)) {
+            $item = AutoIDDatabase::singleton()->findByID('$');
+            if ($item) {
+                return $item->modified();
             }
+            return $autoid->modified();
+        }
+
+        if (is_a($autoid, Page::class) ||
+            is_a($autoid, File::class) ||
+            is_a($autoid, FileVersion::class)) {
+
+            // try finding without reading the file
+            $item = AutoIDDatabase::singleton()->findByID($autoid->id());
+            if ($item) {
+                return $item->modified();
+            }
+            // if fails do not index the object but just check
+            // the file timestamp since that is the fastest thing to do
+            /*
+            if ($autoid->{AutoID::FIELDNAME}()->isNotEmpty()) {
+                // make sure it exists using AUTOID (in caps)
+                return self::modified($autoid->AUTOID());
+            }
+            */
             return $autoid->modified();
         }
 

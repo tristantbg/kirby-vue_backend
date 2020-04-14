@@ -7,6 +7,11 @@ tabs:
         type: pages
         create:
           - default
+        template:
+          - home
+          - artists
+          - error
+          - vimeo.items
   settings:
     label: Settings
     icon: cog
@@ -14,6 +19,32 @@ tabs:
       infos:
         type: fields
         fields:
+          about:
+            label: About
+            type:  textarea
+            buttons:
+              - link
+              - email
+          contact:
+            label: Contact
+            type:  textarea
+            buttons:
+              - link
+              - email
+            width: 1/2
+          instagramName:
+            label: Instagram
+            type: text
+            before: "@"
+            width: 1/2
+          newsletterUserId:
+            label: Newsletter User ID
+            type: text
+            width: 1/2
+          newsletterListId:
+            label: Newsletter List ID
+            type: text
+            width: 1/2
           description:
             label: Description
             type:  textarea

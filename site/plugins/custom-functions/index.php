@@ -34,19 +34,22 @@ foreach (glob( __DIR__ . "/file-methods/*.php") as $filename) {
 
 Kirby::plugin('tristantbg/kirby-functions', [
   'collections' => [
-    // 'casestudiesPage' => function ($site) {
-    //   return $site->pages()->filterBy('intendedTemplate', 'casestudies')->listed()->first();
-    // },
-    // 'casestudies' => function ($site) {
-    //   if ($p = collection('casestudiesPage')) {
-    //     return $p->children()->listed()->filterBy('intendedTemplate', 'casestudy');
-    //   } else {
-    //     return false;
-    //   }
-    // },
-    // 'contactPage' => function ($site) {
-    //   return $site->pages()->filterBy('intendedTemplate', 'about')->listed()->first();
-    // },
+    'artistsPage' => function ($site) {
+      return $site->pages()->filterBy('intendedTemplate', 'artists')->first();
+    },
+    'artists' => function ($site) {
+      if ($p = collection('artistsPage')) {
+        return $p->children()->listed();
+      } else {
+        return false;
+      }
+    },
+    'projects' => function ($site) {
+      return collection('artists')->children()->listed();
+    },
+    'index' => function ($site) {
+      return collection('projects')->add(site()->homepage());
+    },
   ],
   'collectionFilters' => [
       'i*=' => function ($collection, $field, $value, $split = false) {

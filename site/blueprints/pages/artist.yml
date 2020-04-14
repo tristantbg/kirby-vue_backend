@@ -1,0 +1,72 @@
+title: Artist
+tabs:
+  infos:
+    label: Infos
+    icon: text
+    columns:
+      - width: 3/4
+        sections:
+          infos:
+            type: fields
+            fields:
+              instagramName:
+                label: Instagram
+                type: text
+                before: '@'
+                converter: lower
+                width: 1/2
+              website:
+                type: url
+                width: 1/2
+              text:
+                label: Description
+                type: textarea
+                size: medium
+                buttons:
+                  - link
+                  - email
+      - width: 1/4
+        sections:
+          thumbnail:
+            type: fields
+            fields:
+              autoid:
+                type: hidden
+                translate: false
+              featured:
+                label: Featured image
+                type: files
+                multiple: false
+                query: page.children.files.template('image')
+                uploads: image
+              job:
+                type: text
+              gridViewOnly:
+                label: Grid View
+                type: toggle
+                default: false
+  projects:
+    sections:
+      projects:
+        type: pages
+        templates: project
+        layout: cards
+        size: tiny
+        limit: 100
+        image:
+          cover: false
+          ratio: 3/2
+          back: black
+          query: page.featured.toFile
+  files:
+    icon: file
+    sections:
+      files:
+        type: files
+        layout: list
+        template: file
+      images:
+        type: files
+        layout: cards
+        template: image
+        size: tiny
