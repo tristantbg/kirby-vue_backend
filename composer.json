@@ -8,7 +8,7 @@
     }
   ],
   "require": {
-    "getkirby/cms": "3.3.4",
+    "getkirby/cms": "3.4.5",
     "bnomei/kirby3-autoid": "^2.2",
     "timoetting/kirby-builder": "^2.0",
     "sylvainjule/embed": "^1.0",
